@@ -21,6 +21,7 @@ public class PositiveTests {
         //create driver
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
 
         //open test page
 
