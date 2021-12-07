@@ -5,18 +5,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class PositiveTests {
 
     String url = "http://the-internet.herokuapp.com/login";
-    String login = "tomsmith";
-    String password = "SuperSecretPassword!";
     String secureAreaPageUrl = "http://the-internet.herokuapp.com/secure";
 
-
-    @Test
-    public void loginTest(){
+    @Parameters({"userName", "password", "successLoginMessage"})
+    @Test(priority = 1, groups = {"Smoke"})
+    public void loginTest(String userName, String password, String successLoginMessage){
+        System.out.println("Positive Login Test is running.");
 
         //create driver
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
@@ -30,7 +30,7 @@ public class PositiveTests {
 
         //enter username
         WebElement userNameField = driver.findElement(By.xpath("//*[@id='username']"));
-        userNameField.sendKeys(login);
+        userNameField.sendKeys(userName);
 
         //enter password
         WebElement passwordField = driver.findElement(By.id("password"));
@@ -64,8 +64,8 @@ public class PositiveTests {
 
         //success message
         try {
-            WebElement successLoginMessage = driver.findElement(By.xpath("//div[@id='flash'][contains(text(), 'You logged into')]"));
-            Assert.assertTrue(successLoginMessage.getText().contains("You logged into"));
+            WebElement loginMessage = driver.findElement(By.xpath("//div[@id='flash'][contains(text(), 'You logged into')]"));
+            Assert.assertTrue(loginMessage.getText().contains(successLoginMessage));
             System.out.println("'You logged into' message is displayed.");
         } catch (Exception e) {
             System.out.println("'You logged into' message is NOT displayed.");
