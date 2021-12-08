@@ -1,0 +1,66 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="LoginTestsSuit" verbose="1" >
+
+<!--    <parameter name="userName" value="tomsmith" />
+    <parameter name="password" value="SuperSecretPassword!" />
+    <parameter name="successLoginMessage" value="You logged into" />
+    <parameter name="wrongUsername" value="wrongUsername" />
+    <parameter name="wrongPassword" value="wrongPassword" />
+    <parameter name="errorMessageUserName" value="Your username is invalid" />
+    <parameter name="errorMessageWrongPassword" value="Your password is invalid" />-->
+
+
+<!--    <groups>
+        <run>
+            <include name="Smoke"/>
+        </run>
+    </groups>-->
+
+    <test name="PositiveTests" >
+        <parameter name="description" value="Valid username and password" />
+        <parameter name="username" value="tomsmith" />
+        <parameter name="password" value="SuperSecretPassword!" />
+        <parameter name="confirmationMessage" value="You logged into" />
+
+        <classes>
+            <class name="com.herokuapp.theinternet.LoginTests">
+                <methods>
+                    <include name="positiveLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="NegativeUsernameTests">
+        <parameter name="description" value="Invalid username and valid password" />
+        <parameter name="username" value="wrongUsername" />
+        <parameter name="password" value="SuperSecretPassword!" />
+        <parameter name="confirmationMessage" value="Your username is invalid" />
+
+        <classes>
+            <class name="com.herokuapp.theinternet.LoginTests">
+                <methods>
+                    <include name="negativeLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="NegativePasswordTest">
+        <parameter name="description" value="Valid username and invalid password" />
+        <parameter name="username" value="tomsmith" />
+        <parameter name="password" value="wrongPassword" />
+        <parameter name="confirmationMessage" value="Your password is invalid" />
+
+        <classes>
+            <class name="com.herokuapp.theinternet.LoginTests">
+                <methods>
+                    <include name="negativeLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
