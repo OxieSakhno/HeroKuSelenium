@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,11 +16,27 @@ public class LoginTests {
     String url = "http://the-internet.herokuapp.com/login";
     String secureAreaPageUrl = "http://the-internet.herokuapp.com/secure";
 
+    @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true)
-    private void setUp(){
-        //create driver
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        driver = new ChromeDriver();
+    private void setUp(String browser){
+
+        switch (browser){
+            case "chrome":
+                System.out.println("\nChrome browser has started.");
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+                driver = new ChromeDriver();
+                break;
+            case "firefox":
+                System.out.println("\nFirefox browser has started.");
+                System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
+                driver = new FirefoxDriver();
+                break;
+            default:
+                System.out.println("Unknown browser '" + browser.toUpperCase() + "' has been called. Default (Chrome) browser has started.");
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+                driver = new ChromeDriver();
+                break;
+        }
         driver.manage().window().maximize();
     }
 
