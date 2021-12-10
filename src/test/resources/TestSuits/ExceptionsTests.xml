@@ -1,0 +1,41 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Exceptions Tests Suit" verbose="1" >
+
+    <test name="Different Exceptions Test" >
+        <classes>
+            <class name="com.herokuapp.theinternet.ExceptionsTests">
+                <methods>
+                    <exclude name="notVisibleTest"/>
+                    <exclude name="timeoutTest"/>
+                    <exclude name="noSuchElementTest"/>
+                    <exclude name="staleElementTest"/>
+                    <include name="disabledElementTest"/>
+
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+<!--    <test name="Timeout Test">
+        <classes>
+            <class name="com.herokuapp.theinternet.ExceptionsTests">
+                <methods>
+                    <include name="timeoutTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="No Such Element Test">
+        <classes>
+            <class name="com.herokuapp.theinternet.ExceptionsTests">
+                <methods>
+                    <include name="noSuchElementTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>-->
+</suite>
