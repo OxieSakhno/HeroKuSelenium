@@ -4,7 +4,7 @@
 
     <test name="Different Exceptions Test" >
         <classes>
-            <class name="com.herokuapp.theinternet.ExceptionsTests">
+            <class name="com.herokuapp.theinternet.loginpagetests.ExceptionsTests">
                 <methods>
                     <exclude name="notVisibleTest"/>
                     <exclude name="timeoutTest"/>
@@ -20,7 +20,7 @@
 
 <!--    <test name="Timeout Test">
         <classes>
-            <class name="com.herokuapp.theinternet.ExceptionsTests">
+            <class name="com.herokuapp.theinternet.loginpagetests.ExceptionsTests">
                 <methods>
                     <include name="timeoutTest"/>
                 </methods>
@@ -31,7 +31,7 @@
 
     <test name="No Such Element Test">
         <classes>
-            <class name="com.herokuapp.theinternet.ExceptionsTests">
+            <class name="com.herokuapp.theinternet.loginpagetests.ExceptionsTests">
                 <methods>
                     <include name="noSuchElementTest"/>
                 </methods>

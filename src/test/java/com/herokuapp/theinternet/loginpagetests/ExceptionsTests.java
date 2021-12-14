@@ -1,35 +1,19 @@
-package com.herokuapp.theinternet;
+package com.herokuapp.theinternet.loginpagetests;
 
+import com.herokuapp.theinternet.base.TestUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class ExceptionsTests {
-    private WebDriver driver;
-
-
-    @BeforeMethod(alwaysRun = true)
-    private void setUp(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        driver = new ChromeDriver();
-    }
-
-    @AfterMethod(alwaysRun = true)
-    private void tearDown(){
-        driver.quit();
-    }
+public class ExceptionsTests extends TestUtilities {
 
     @Test(priority = 1)
     public void notVisibleTest(){
-        System.out.println("\nElement Not Visible Test is started.");
+        log.info("\nElement Not Visible Test is started.");
 
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
 
@@ -47,7 +31,7 @@ public class ExceptionsTests {
 
     @Test(priority = 2)
     public void timeoutTest(){
-        System.out.println("\nTimeout Test is started.");
+        log.info("\nTimeout Test is started.");
 
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
 
@@ -60,7 +44,7 @@ public class ExceptionsTests {
         try {
             wait.until(ExpectedConditions.visibilityOf(finishElement));
         } catch (TimeoutException exception) {
-            System.out.println("Exception caught: " + exception.getMessage());
+            log.info("Exception caught: " + exception.getMessage());
         }
 
         String finishText = finishElement.getText();
@@ -70,7 +54,7 @@ public class ExceptionsTests {
 
     @Test(priority = 3)
     public void noSuchElementTest(){
-        System.out.println("\nNo Such Element Test is started.");
+        log.info("\nNo Such Element Test is started.");
 
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/2");
 
@@ -85,16 +69,16 @@ public class ExceptionsTests {
 
         try {
             String hello = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("finish"))).getText();
-            System.out.println("Element contains text: " + hello);
+            log.info("Element contains text: " + hello);
         } catch (TimeoutException exception) {
-            System.out.println("Exception caught: " + exception.getMessage());
+            log.info("Exception caught: " + exception.getMessage());
         }
     }
 
 
     @Test(priority = 4)
     public void staleElementTest(){
-        System.out.println("\nStale Element Test is started.");
+        log.info("\nStale Element Test is started.");
         driver.get("https://the-internet.herokuapp.com/dynamic_controls");
 
         WebElement checkbox = driver.findElement(By.id("checkbox"));
@@ -110,9 +94,9 @@ public class ExceptionsTests {
 
         try {
             Assert.assertTrue(wait.until(ExpectedConditions.stalenessOf(checkbox)), "Checkbox shouldn't be visible.");
-            System.out.println("Checkbox has disappeared.");
+            log.info("Checkbox has disappeared.");
         } catch (Exception e) {
-            System.out.println("Exception text: " + e.getMessage());;
+            log.info("Exception text: " + e.getMessage());;
         }
 
         WebElement addButton = driver.findElement(By.xpath("//button[contains(text(), 'Add')]"));
@@ -121,13 +105,13 @@ public class ExceptionsTests {
         //reAssign reference to the new checkbox object
         checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("checkbox")));
         Assert.assertTrue(checkbox.isDisplayed(), "Error. Checkbox is not visible.");
-        System.out.println("Checkbox is displayed again. Hooray!");
+        log.info("Checkbox is displayed again. Hooray!");
     }
 
 
     @Test
     public void disabledElementTest(){
-        System.out.println("\nDisabled Element Test is started.");
+        log.info("\nDisabled Element Test is started.");
         driver.get("https://the-internet.herokuapp.com/dynamic_controls");
 
         String text = "Hello World!";
@@ -142,7 +126,7 @@ public class ExceptionsTests {
 
         String textFromField = enableField.getAttribute("value");
         Assert.assertEquals(textFromField, text);
-        System.out.println("Entered value is: " + text
+        log.info("Entered value is: " + text
                 + "\nRetrieved value is: " + textFromField);
     }
 }
