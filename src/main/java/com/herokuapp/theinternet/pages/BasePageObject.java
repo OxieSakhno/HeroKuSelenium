@@ -1,10 +1,7 @@
 package com.herokuapp.theinternet.pages;
 
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,13 +37,13 @@ public class BasePageObject {
 
     /** Click on element with given locator when it visible */
     protected void click(By locator){
-        waitForVisibilityOf(locator, 5);
+        //waitForVisibilityOf(locator, 5); // Redundant method. find() already has waitForVisibility
         find(locator).click();
     }
 
     /** Type given text into element with given locator */
     protected void type(String text, By locator){
-        waitForVisibilityOf(locator, 5);
+        // waitForVisibilityOf(locator, 5); //Same as click()
         find(locator).sendKeys(text);
     }
 
@@ -72,6 +69,7 @@ public class BasePageObject {
                         (timeOutInSeconds.length > 0 ? timeOutInSeconds[0] : null));
                         break;
             } catch (StaleElementReferenceException e) {
+                System.out.println("Exception caught " + e.getMessage());
             }
             attempts++;
         }
@@ -80,6 +78,13 @@ public class BasePageObject {
     /** Gets current URL */
     public String getCurrentUrl(){
         return driver.getCurrentUrl();
+    }
+
+    /** Wait for Alert present and then switch to it */
+    protected Alert switchToAlert(){
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.alertIsPresent());
+        return driver.switchTo().alert();
     }
 
 }
