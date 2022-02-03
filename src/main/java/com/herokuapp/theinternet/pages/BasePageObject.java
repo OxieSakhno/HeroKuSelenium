@@ -6,7 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class BasePageObject {
 
@@ -85,6 +87,35 @@ public class BasePageObject {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.alertIsPresent());
         return driver.switchTo().alert();
+    }
+
+    /** Returns title of the page */
+    private String getCurrentPageTitle(){
+        return driver.getTitle();
+    }
+
+    /** Returns page sours */
+    public String getCurrentPageSource(){
+        return driver.getPageSource();
+    }
+
+    /** Switches to Page with given title */
+    protected void switchToWindowWithTitle(String expectedTitle){
+        //Switching to new window
+        String parent = driver.getWindowHandle();
+
+        Set<String> allWindows = driver.getWindowHandles();
+        Iterator<String> windowsIterator = allWindows.iterator();
+
+        while(windowsIterator.hasNext()){
+            String windowHandle = windowsIterator.next().toString();
+            if(!windowHandle.equals(parent)){
+                driver.switchTo().window(windowHandle);
+                if(getCurrentPageTitle().equals(expectedTitle)){
+                    break;
+                }
+            }
+        }
     }
 
 }
