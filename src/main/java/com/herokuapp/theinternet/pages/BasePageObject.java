@@ -99,23 +99,28 @@ public class BasePageObject {
         return driver.getPageSource();
     }
 
-    /** Switches to Page with given title */
+    /** Switches to a Page with given title */
     protected void switchToWindowWithTitle(String expectedTitle){
         //Switching to new window
-        String parent = driver.getWindowHandle();
+        String parentWindow = driver.getWindowHandle();
 
         Set<String> allWindows = driver.getWindowHandles();
-        Iterator<String> windowsIterator = allWindows.iterator();
+        Iterator<String> windowIterator = allWindows.iterator();
 
-        while(windowsIterator.hasNext()){
-            String windowHandle = windowsIterator.next().toString();
-            if(!windowHandle.equals(parent)){
+        while(windowIterator.hasNext()){
+            String windowHandle = windowIterator.next().toString();
+            if(!windowHandle.equals(parentWindow)){
                 driver.switchTo().window(windowHandle);
                 if(getCurrentPageTitle().equals(expectedTitle)){
                     break;
                 }
             }
         }
+    }
+
+    /** Switch to a frame with given locator */
+    protected void switchToFrame(By locator) {
+        driver.switchTo().frame(find(locator));
     }
 
 }

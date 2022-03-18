@@ -7,11 +7,7 @@
         <parameter name="browser" value="chrome" />
 
         <classes>
-            <class name="com.herokuapp.theinternet.opennewwindowtest.OpenNewWindowTests">
-                <methods>
-                    <include name="openNewWindowTest" />
-                </methods>
-            </class>
+            <class name="com.herokuapp.theinternet.opennewwindowtest.OpenNewWindowTests" />
         </classes>
     </test>
 
