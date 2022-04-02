@@ -13,6 +13,10 @@ Sixth task. Create a Conflict.
 "Solved."
 
 Some Dude. Task-001.
-"Task Numero Uno."
-"Do super awesome stuff. Do, do, do"
-"Done."
+    "Task_001."
+        "Do super awesome stuff. Do, do, do"
+            "Done."
+
+Senya. Task_002.
+    "Do some stuff. Do, do, do."
+        "Done."
