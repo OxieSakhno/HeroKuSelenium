@@ -1,15 +1,14 @@
 package com.herokuapp.theinternet.pages;
 
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class BasePageObject {
 
@@ -40,13 +39,13 @@ public class BasePageObject {
 
     /** Click on element with given locator when it visible */
     protected void click(By locator){
-        waitForVisibilityOf(locator, 5);
+        //waitForVisibilityOf(locator, 5); // Redundant method. find() already has waitForVisibility
         find(locator).click();
     }
 
     /** Type given text into element with given locator */
     protected void type(String text, By locator){
-        waitForVisibilityOf(locator, 5);
+        // waitForVisibilityOf(locator, 5); //Same as click()
         find(locator).sendKeys(text);
     }
 
@@ -72,6 +71,7 @@ public class BasePageObject {
                         (timeOutInSeconds.length > 0 ? timeOutInSeconds[0] : null));
                         break;
             } catch (StaleElementReferenceException e) {
+                System.out.println("Exception caught " + e.getMessage());
             }
             attempts++;
         }
@@ -80,6 +80,47 @@ public class BasePageObject {
     /** Gets current URL */
     public String getCurrentUrl(){
         return driver.getCurrentUrl();
+    }
+
+    /** Wait for Alert present and then switch to it */
+    protected Alert switchToAlert(){
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.alertIsPresent());
+        return driver.switchTo().alert();
+    }
+
+    /** Returns title of the page */
+    private String getCurrentPageTitle(){
+        return driver.getTitle();
+    }
+
+    /** Returns page sours */
+    public String getCurrentPageSource(){
+        return driver.getPageSource();
+    }
+
+    /** Switches to a Page with given title */
+    protected void switchToWindowWithTitle(String expectedTitle){
+        //Switching to new window
+        String parentWindow = driver.getWindowHandle();
+
+        Set<String> allWindows = driver.getWindowHandles();
+        Iterator<String> windowIterator = allWindows.iterator();
+
+        while(windowIterator.hasNext()){
+            String windowHandle = windowIterator.next().toString();
+            if(!windowHandle.equals(parentWindow)){
+                driver.switchTo().window(windowHandle);
+                if(getCurrentPageTitle().equals(expectedTitle)){
+                    break;
+                }
+            }
+        }
+    }
+
+    /** Switch to a frame with given locator */
+    protected void switchToFrame(By locator) {
+        driver.switchTo().frame(find(locator));
     }
 
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="JSAlertsTestSuit" verbose="1" parallel="tests" thread-count="1">
+
+
+    <test name="jsAlertTest" >
+        <parameter name="description" value="Verify that JSAlerts can be triggered" />
+        <parameter name="browser" value="chrome" />
+        <parameter name="text" value="Hello Alert!"/>
+
+        <classes>
+            <class name="com.herokuapp.theinternet.jsalertstests.JSAlertsTests">
+                <methods>
+                    <include name="jsAlertTest" />
+                    <include name="jsConfirmOkTest" />
+                    <include name="jsConfirmDismissTest" />
+                    <include name="jsPromptTest" />
+                    <include name="jsPromptCancelTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

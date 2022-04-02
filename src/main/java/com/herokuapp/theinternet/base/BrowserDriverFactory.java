@@ -23,6 +23,9 @@ public class BrowserDriverFactory {
             case "chrome":
                 //log.info("Chrome browser is started");
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+                //ChromeOptions option = new ChromeOptions();
+                //option.setHeadless(true);
+                //option.addArguments("headless");
                 driver.set(new ChromeDriver());
                 break;
             case "firefox":

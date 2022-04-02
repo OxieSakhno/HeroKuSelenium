@@ -2,10 +2,10 @@
 
 <suite name="CheckboxesTestSuit" verbose="1" parallel="tests" thread-count="1">
 
-    <test name="allCheckboxesAreSelectedTest" >
 
-        <parameter name="browser" value="chrome" />
+    <test name="allCheckboxesAreSelectedTest" >
         <parameter name="description" value="Verify that all checkboxes can be checked." />
+        <parameter name="browser" value="chrome" />
         <parameter name="username" value="tomsmith" />
         <parameter name="password" value="SuperSecretPassword!" />
 
@@ -18,10 +18,10 @@
         </classes>
     </test>
 
-    <test name="isDefaultCheckboxSelectedTest" >
 
-        <parameter name="browser" value="chrome" />
+    <test name="isDefaultCheckboxSelectedTest" >
         <parameter name="description" value="Verify that default checkbox is selected." />
+        <parameter name="browser" value="chrome" />
         <parameter name="username" value="tomsmith" />
         <parameter name="password" value="SuperSecretPassword!" />
 
