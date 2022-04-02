@@ -10,3 +10,4 @@ Fifth commit.
 
 Sixth task. Create a Conflict.
     "Here is a Conflict that needs to be solved."
+"Solved."
