@@ -8,5 +8,6 @@ Third commit.
 Fourth commit.
 Fifth commit.
 
-Task 0006. Create a Conflict.
-"This is a conflict. Done. Boom."
+Sixth task. Create a Conflict.
+    "Here is a Conflict that needs to be solved."
+"Solved."
