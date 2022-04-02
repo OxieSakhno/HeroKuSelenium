@@ -12,6 +12,11 @@ Sixth task. Create a Conflict.
     "Here is a Conflict that needs to be solved."
 "Solved."
 
+Some Dude. Task-001.
+    "Task_001."
+        "Do super awesome stuff. Do, do, do"
+            "Done."
+
 Senya. Task_002.
     "Do some stuff. Do, do, do."
         "Done."
