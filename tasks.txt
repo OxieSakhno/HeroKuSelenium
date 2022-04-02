@@ -11,3 +11,7 @@ Fifth commit.
 Sixth task. Create a Conflict.
     "Here is a Conflict that needs to be solved."
 "Solved."
+
+Senya. Task_002.
+    "Do some stuff. Do, do, do."
+        "Done."
