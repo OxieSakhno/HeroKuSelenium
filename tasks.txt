@@ -7,3 +7,6 @@ Second commit.
 Third commit.
 Fourth commit.
 Fifth commit.
+
+Sixth task. Create a Conflict.
+    "Here is a Conflict that needs to be solved."
